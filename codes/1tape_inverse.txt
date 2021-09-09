@@ -1,0 +1,16 @@
+NUM_TAPES = 1
+
+ALPHABET = {0, 1, >, _}
+
+STATES = {Qinit, Q1, Q2, Qhalt}
+
+TRANSITION_FUNC =
+(Qinit, >) --> (Q1, >, S)
+(Q1, >) --> (Q1, >, R)
+(Q1, 0) --> (Q1, 0, R)
+(Q1, 1) --> (Q1, 1, R)
+(Q1, _) --> (Q2, _, S)
+(Q2, _) --> (Q2, _, L)
+(Q2, 0) --> (Q2, 1, L)
+(Q2, 1) --> (Q2, 0, L)
+(Q2, >) --> (Qhalt, >, S)
