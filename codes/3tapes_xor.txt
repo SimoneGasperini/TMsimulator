@@ -1,0 +1,22 @@
+NUM_TAPES = 3
+
+ALPHABET = {0, 1, >, _, #}
+
+STATES = {Qinit, Qcut, Qxor, Qback2, Qback3, Qhalt}
+
+TRANSITION_FUNC =
+(Qinit, >, >, >) --> (Qcut, >, >, >, R, R, S)
+(Qcut, 0, _, >) --> (Qcut, >, 0, >, R, R, S)
+(Qcut, 1, _, >) --> (Qcut, >, 1, >, R, R, S)
+(Qcut, #, _, >) --> (Qback2, >, _, >, S, L, S)
+(Qback2, >, 0, >) --> (Qback2, >, 0, >, S, L, S)
+(Qback2, >, 1, >) --> (Qback2, >, 1, >, S, L, S)
+(Qback2, >, >, >) --> (Qxor, >, >, >, R, R, R)
+(Qxor, 0, 0, _) --> (Qxor, 0, 0, 0, R, R, R)
+(Qxor, 0, 1, _) --> (Qxor, 0, 1, 1, R, R, R)
+(Qxor, 1, 0, _) --> (Qxor, 1, 0, 1, R, R, R)
+(Qxor, 1, 1, _) --> (Qxor, 1, 1, 0, R, R, R)
+(Qxor, _, _, _) --> (Qback3, _, _, _, S, S, L)
+(Qback3, _, _, 0) --> (Qback3, _, _, 0, S, S, L)
+(Qback3, _, _, 1) --> (Qback3, _, _, 1, S, S, L)
+(Qback3, _, _, >) --> (Qhalt, _, _, >, S, S, S)

@@ -1,0 +1,26 @@
+NUM_TAPES = 1
+
+ALPHABET = {0, 1, >, _}
+
+STATES = {Qinit, Qr, Ql, Q0r, Q1r, Q0l, Q1l, Qaccept, Qreject}
+
+TRANSITION_FUNC =
+(Qinit, >) --> (Qr, >, R)
+(Qr, 0) --> (Q0r, >, R)
+(Qr, 1) --> (Q1r, >, R)
+(Qr, _) --> (Qaccept, _, S)
+(Ql, 0) --> (Ql, 0, L)
+(Ql, 1) --> (Ql, 1, L)
+(Ql, >) --> (Qr, >, R)
+(Q0r, 0) --> (Q0r, 0, R)
+(Q0r, 1) --> (Q0r, 1, R)
+(Q0r, _) --> (Q0l, _, L)
+(Q1r, 0) --> (Q1r, 0, R)
+(Q1r, 1) --> (Q1r, 1, R)
+(Q1r, _) --> (Q1l, _, L)
+(Q0l, 0) --> (Ql, _, L)
+(Q0l, 1) --> (Qreject, 1, S)
+(Q0l, >) --> (Qaccept, _, S)
+(Q1l, 0) --> (Qreject, 0, S)
+(Q1l, 1) --> (Ql, _, L)
+(Q1l, >) --> (Qaccept, _, S)

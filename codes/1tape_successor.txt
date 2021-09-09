@@ -1,0 +1,20 @@
+NUM_TAPES = 1
+
+ALPHABET = {0, 1, >, _}
+
+STATES = {Qinit, Qr, Ql, Qadd, Qcarry, Qend, Qhalt}
+
+TRANSITION_FUNC =
+(Qinit, >) --> (Qr, >, R)
+(Qr, 0) --> (Qr, 0, R)
+(Qr, 1) --> (Qr, 1, R)
+(Qr, _) --> (Qadd, _, L)
+(Qadd, 0) --> (Ql, 1, L)
+(Qadd, 1) --> (Qcarry, 0, L)
+(Qcarry, 0) --> (Ql, 1, L)
+(Qcarry, 1) --> (Qcarry, 0, L)
+(Qcarry, >) --> (Qend, 1, L)
+(Ql, 0) --> (Ql, 0, L)
+(Ql, 1) --> (Ql, 1, L)
+(Ql, >) --> (Qhalt, >, S)
+(Qend, _) --> (Qhalt, >, S)
